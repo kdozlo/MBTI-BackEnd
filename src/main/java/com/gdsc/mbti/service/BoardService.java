@@ -1,12 +1,9 @@
 package com.gdsc.mbti.service;
 
+import com.gdsc.mbti.entity.Post;
+
+import java.util.List;
+
 public interface BoardService {
-    public String getPostList();
-
-    public String savePost(String content, String uid);
-
-    public String updatePost(Long id, String content);
-
-    public String deletePost(Long id);
-
+    public List<Post> getPostList();
 }

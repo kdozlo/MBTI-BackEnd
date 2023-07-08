@@ -1,6 +1,9 @@
 package com.gdsc.mbti.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,11 +13,9 @@ import org.springframework.data.annotation.LastModifiedDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "board")
-@NoArgsConstructor
 @Getter
-public class Board {
-
+@NoArgsConstructor
+public class Post {
     @Id
     @Column
     @GeneratedValue
@@ -31,7 +32,7 @@ public class Board {
     private LocalDateTime updatedAt;
 
     @Builder
-    public Board(String nickname, String content) {
+    public Post(String nickname, String content) {
         this.nickname = nickname;
         this.content = content;
     }

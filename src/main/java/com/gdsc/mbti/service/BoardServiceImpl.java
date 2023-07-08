@@ -1,23 +1,18 @@
 package com.gdsc.mbti.service;
 
-public class BoardServiceImpl implements BoardService{
-    @Override
-    public String getPostList() {
-        return null;
-    }
+import com.gdsc.mbti.entity.Post;
+import com.gdsc.mbti.repository.BoardRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
-    @Override
-    public String savePost(String content, String uid) {
-        return null;
-    }
+import java.util.List;
 
+@RequiredArgsConstructor
+@Service
+public class BoardServiceImpl implements BoardService {
+    private final BoardRepository boardRepository;
     @Override
-    public String updatePost(Long id, String content) {
-        return null;
-    }
-
-    @Override
-    public String deletePost(Long id) {
+    public List<Post> getPostList() {
         return null;
     }
 }
