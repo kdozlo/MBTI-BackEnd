@@ -16,7 +16,10 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<Post> getPostList(String mbti) {
-        return postRepository.findAllByMbti(mbti);
+        if (mbti.equals("all"))
+            return postRepository.findAll();
+        else
+            return postRepository.findAllByMbti(mbti);
     }
 
     @Override

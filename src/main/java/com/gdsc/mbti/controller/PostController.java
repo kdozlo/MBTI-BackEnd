@@ -22,9 +22,8 @@ public class PostController {
     }
 
     @PostMapping("/{mbti}/write")
-    public String writePost(@PathVariable("mbti") String mbti, @RequestBody PostRequestDto requestDto) {
-        postService.save(requestDto);
-        return "";
+    public Long writePost(@PathVariable("mbti") String mbti, @RequestBody PostRequestDto requestDto) {
+        return postService.save(requestDto);
     }
 
     @PutMapping("/{mbti}/{id}")
