@@ -16,25 +16,25 @@ import java.util.List;
 public class PostController {
 
     private final PostService postService;
-    @GetMapping("/{type}")
-    public List<Post> getPostList(@PathVariable("type") String type) {
-        return postService.getPostList(type);
+    @GetMapping("/{mbti}")
+    public List<Post> getPostList(@PathVariable("mbti") String mbti) {
+        return postService.getPostList(mbti);
     }
 
-    @PostMapping("/{type}/write")
-    public String writePost(@PathVariable("type") String type, @RequestBody PostRequestDto requestDto) {
+    @PostMapping("/{mbti}/write")
+    public String writePost(@PathVariable("mbti") String mbti, @RequestBody PostRequestDto requestDto) {
         postService.save(requestDto);
         return "";
     }
 
-    @PutMapping("/{type}/{id}")
-    public String updatePost(@PathVariable("type") String type, @PathVariable("id") Long id, @RequestBody PostRequestDto requestDto) {
+    @PutMapping("/{mbti}/{id}")
+    public String updatePost(@PathVariable("mbti") String mbti, @PathVariable("id") Long id, @RequestBody PostRequestDto requestDto) {
         postService.update(id, "");
         return "";
     }
 
-    @DeleteMapping("/{type}/{id}")
-    public String deletePost(@PathVariable("type") String type, @PathVariable("id") Long id) {
+    @DeleteMapping("/{mbti}/{id}")
+    public String deletePost(@PathVariable("mbti") String mbti, @PathVariable("id") Long id) {
         postService.delete(id);
         return "";
     }
