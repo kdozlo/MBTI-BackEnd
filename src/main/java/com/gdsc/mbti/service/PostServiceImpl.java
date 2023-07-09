@@ -15,8 +15,8 @@ public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
 
     @Override
-    public List<Post> getPostList() {
-       return postRepository.findAll();
+    public List<Post> getPostList(String mbti) {
+        return postRepository.findAllByMbti(mbti);
     }
 
     @Override

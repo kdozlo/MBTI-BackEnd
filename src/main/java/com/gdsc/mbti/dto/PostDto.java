@@ -3,16 +3,18 @@ package com.gdsc.mbti.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import org.springframework.data.annotation.Id;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Builder
 @AllArgsConstructor
-@Data
-public class BoardDto {
+@NoArgsConstructor
+@Getter
+public class PostDto {
     private Long id;
+    private String mbti;
     private String nickname;
     private String content;
     private LocalDateTime createdAt;

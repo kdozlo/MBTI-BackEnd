@@ -21,6 +21,8 @@ public class Post {
     @GeneratedValue
     private Long id;
 
+    private String mbti;
+
     private String nickname;
 
     private String content;
@@ -32,7 +34,8 @@ public class Post {
     private LocalDateTime updatedAt;
 
     @Builder
-    public Post(String nickname, String content) {
+    public Post(String mbti, String nickname, String content) {
+        this.mbti = mbti;
         this.nickname = nickname;
         this.content = content;
     }
