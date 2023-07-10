@@ -1,0 +1,27 @@
+version: "3.7"
+
+services:
+  mbti_spring:
+    container_name: mbti_spring
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mbti_mysql
+    environment:
+      PROFILE: prod
+    restart: always
+
+  mbti_mysql:
+    container_name: mbti_mysql
+    image: mysql:8.0.31
+    expose:
+      - "3306"
+    command: --lower_case_table_names=1
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - ./db:/var/lib/mysql

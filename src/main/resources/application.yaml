@@ -1,0 +1,27 @@
+spring:
+  jpa:
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+
+--- # Local
+spring:
+  config:
+    activate:
+      on-profile: local
+
+--- # Prod
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://mbti_mysql:3306/${MYSQL_DATABASE}?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8
+    username: ${MYSQL_ROOT_NAME}
+    password: ${MYSQL_ROOT_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: create # TODO: ??? ?, validate
+    open-in-view: false
