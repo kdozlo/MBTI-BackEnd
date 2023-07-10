@@ -4,15 +4,11 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @NoArgsConstructor
-public class Post extends BaseTimeEntity{
+public class Post extends BaseTimeEntity {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,5 +25,17 @@ public class Post extends BaseTimeEntity{
         this.mbti = mbti;
         this.nickname = nickname;
         this.content = content;
+    }
+
+    public void updateContent(String content) {
+        this.content = content;
+    }
+
+    public void updateNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public void updateMbti(String mbti) {
+        this.mbti = mbti;
     }
 }
