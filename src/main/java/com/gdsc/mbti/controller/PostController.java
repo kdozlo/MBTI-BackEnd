@@ -1,6 +1,8 @@
 package com.gdsc.mbti.controller;
 
 import com.gdsc.mbti.dto.PostRequestDto;
+import com.gdsc.mbti.dto.PostResponseDto;
+import com.gdsc.mbti.dto.PostUpdateRequestDto;
 import com.gdsc.mbti.entity.Post;
 import com.gdsc.mbti.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -21,20 +23,23 @@ public class PostController {
         return postService.getPostList(mbti);
     }
 
+    @GetMapping("/{mbti}/{id}")
+    public PostResponseDto getPost(@PathVariable("mbti") String mbti, @PathVariable("id") Long id) {
+        return postService.getPost(id);
+    }
+
     @PostMapping("/{mbti}/write")
     public Long writePost(@PathVariable("mbti") String mbti, @RequestBody PostRequestDto requestDto) {
         return postService.save(requestDto);
     }
 
     @PutMapping("/{mbti}/{id}")
-    public String updatePost(@PathVariable("mbti") String mbti, @PathVariable("id") Long id, @RequestBody PostRequestDto requestDto) {
-        postService.update(id, "");
-        return "";
+    public Long updatePost(@PathVariable("mbti") String mbti, @PathVariable("id") Long id, @RequestBody PostUpdateRequestDto requestDto) {
+        return postService.update(id, requestDto);
     }
 
     @DeleteMapping("/{mbti}/{id}")
-    public String deletePost(@PathVariable("mbti") String mbti, @PathVariable("id") Long id) {
-        postService.delete(id);
-        return "";
+    public Long deletePost(@PathVariable("mbti") String mbti, @PathVariable("id") Long id) {
+        return postService.delete(id);
     }
 }

@@ -1,10 +1,13 @@
 package com.gdsc.mbti.service;
 
 import com.gdsc.mbti.dto.PostRequestDto;
+import com.gdsc.mbti.dto.PostResponseDto;
+import com.gdsc.mbti.dto.PostUpdateRequestDto;
 import com.gdsc.mbti.entity.Post;
 import com.gdsc.mbti.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,24 +26,37 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public PostResponseDto getPost(Long id) {
+        Post entity = postRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("해당 게시글이 없습니다.")
+        );
+        return new PostResponseDto(entity);
+    }
+
+    @Override
+    @Transactional
     public Long save(PostRequestDto requestDto) {
         return postRepository.save(requestDto.toEntity()).getId();
     }
 
     @Override
-    public String update(Long id, String content) {
-        postRepository.findById(id).orElseThrow(
+    @Transactional
+    public Long update(Long id, PostUpdateRequestDto requestDto) {
+        Post updatePost = postRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("해당 게시글이 없습니다.")
         );
-//        postRepository.update(id, content);
-        return "";
+        updatePost.updateContent(requestDto.getContent());
+        postRepository.save(updatePost);
+        return id;
     }
 
     @Override
-    public void delete(Long id) {
+    @Transactional
+    public Long delete(Long id) {
         postRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("해당 게시글이 없습니다.")
         );
         postRepository.deleteById(id);
+        return id;
     }
 }

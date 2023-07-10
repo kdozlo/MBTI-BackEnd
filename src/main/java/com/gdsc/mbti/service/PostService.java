@@ -1,15 +1,19 @@
 package com.gdsc.mbti.service;
 
 import com.gdsc.mbti.dto.PostRequestDto;
+import com.gdsc.mbti.dto.PostResponseDto;
+import com.gdsc.mbti.dto.PostUpdateRequestDto;
 import com.gdsc.mbti.entity.Post;
 
 import java.util.List;
 
 public interface PostService {
     public List<Post> getPostList(String mbti);
+
+    public PostResponseDto getPost(Long id);
     public Long save(PostRequestDto requestDto);
 
-    public String update(Long id, String content);
+    public Long update(Long id, PostUpdateRequestDto requestDto);
 
-    public void delete(Long id);
+    public Long delete(Long id);
 }
