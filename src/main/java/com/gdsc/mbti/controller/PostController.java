@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/board")
@@ -19,8 +20,9 @@ public class PostController {
 
     private final PostService postService;
     @GetMapping("/{mbti}")
-    public List<Post> getPostList(@PathVariable("mbti") String mbti) {
-        return postService.getPostList(mbti);
+    public List<PostResponseDto> getPostList(@PathVariable("mbti") String mbti) {
+        List<Post> postList =  postService.getPostList(mbti);
+        return postList.stream().map(PostResponseDto::new).collect(Collectors.toList());
     }
 
     @GetMapping("/{mbti}/{id}")
