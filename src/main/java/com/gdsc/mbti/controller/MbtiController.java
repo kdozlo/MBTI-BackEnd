@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/mbti")
 @RequiredArgsConstructor
+@CrossOrigin
 public class MbtiController {
 
     private final MbtiService service;
