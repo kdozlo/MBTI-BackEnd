@@ -5,12 +5,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
 @Getter
+@Table(name = "comment")
 @NoArgsConstructor
-public class Post extends BaseTimeEntity {
+public class Comment extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,27 +21,19 @@ public class Post extends BaseTimeEntity {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
-    @OrderBy("id asc")
-    private List<Comment> comments;
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
 
     @Builder
-    public Post(String mbti, String nickname, String content, List<Comment> comments) {
+    public Comment(String mbti, String nickname, String content, Post post) {
         this.mbti = mbti;
         this.nickname = nickname;
         this.content = content;
-        this.comments = comments;
+        this.post = post;
     }
 
     public void updateContent(String content) {
         this.content = content;
-    }
-
-    public void updateNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public void updateMbti(String mbti) {
-        this.mbti = mbti;
     }
 }
