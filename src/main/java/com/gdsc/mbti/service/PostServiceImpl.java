@@ -18,11 +18,13 @@ public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Post> getPostList() {
         return postRepository.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public PostResponseDto getPost(Long id) {
         Post entity = postRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("해당 게시글이 없습니다.")
