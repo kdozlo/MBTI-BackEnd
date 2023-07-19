@@ -26,7 +26,6 @@ public class PostRequestDto {
                 .mbti(mbti)
                 .nickname(nickname)
                 .content(content)
-                .comments(Collections.emptyList())
                 .build();
     }
 }
