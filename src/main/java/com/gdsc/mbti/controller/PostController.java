@@ -15,33 +15,34 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/board")
 @RequiredArgsConstructor
+@CrossOrigin
 @Slf4j
 public class PostController {
 
     private final PostService postService;
-    @GetMapping("/{mbti}")
-    public List<PostResponseDto> getPostList(@PathVariable("mbti") String mbti) {
-        List<Post> postList =  postService.getPostList(mbti);
+    @GetMapping
+    public List<PostResponseDto> getPostList() {
+        List<Post> postList =  postService.getPostList();
         return postList.stream().map(PostResponseDto::new).collect(Collectors.toList());
     }
 
-    @GetMapping("/{mbti}/{id}")
-    public PostResponseDto getPost(@PathVariable("mbti") String mbti, @PathVariable("id") Long id) {
+    @GetMapping("/{id}")
+    public PostResponseDto getPost(@PathVariable("id") Long id) {
         return postService.getPost(id);
     }
 
-    @PostMapping("/{mbti}/write")
-    public Long writePost(@PathVariable("mbti") String mbti, @RequestBody PostRequestDto requestDto) {
+    @PostMapping("/write")
+    public Long writePost(@RequestBody PostRequestDto requestDto) {
         return postService.save(requestDto);
     }
 
-    @PutMapping("/{mbti}/{id}")
-    public Long updatePost(@PathVariable("mbti") String mbti, @PathVariable("id") Long id, @RequestBody PostUpdateRequestDto requestDto) {
+    @PutMapping("/{id}")
+    public Long updatePost(@PathVariable("id") Long id, @RequestBody PostUpdateRequestDto requestDto) {
         return postService.update(id, requestDto);
     }
 
-    @DeleteMapping("/{mbti}/{id}")
-    public Long deletePost(@PathVariable("mbti") String mbti, @PathVariable("id") Long id) {
+    @DeleteMapping("/{id}")
+    public Long deletePost(@PathVariable("id") Long id) {
         return postService.delete(id);
     }
 }

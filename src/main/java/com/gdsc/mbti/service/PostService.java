@@ -8,7 +8,7 @@ import com.gdsc.mbti.entity.Post;
 import java.util.List;
 
 public interface PostService {
-    public List<Post> getPostList(String mbti);
+    public List<Post> getPostList();
 
     public PostResponseDto getPost(Long id);
     public Long save(PostRequestDto requestDto);
