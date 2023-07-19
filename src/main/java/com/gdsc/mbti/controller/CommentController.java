@@ -12,21 +12,22 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/board")
 @RequiredArgsConstructor
+@CrossOrigin
 @Slf4j
 public class CommentController {
     private final CommentService commentService;
-    @PostMapping("/{mbti}/{id}/reply")
-    public Long writeReply(@PathVariable("mbti") String mbti, @PathVariable("id") Long id, @RequestBody CommentRequestDto requestDto) {
+    @PostMapping("/{id}/reply")
+    public Long writeReply(@PathVariable("id") Long id, @RequestBody CommentRequestDto requestDto) {
         return commentService.save(id, requestDto);
     }
 
-    @PutMapping("/{mbti}/{id}/reply/{replyId}")
-    public Long updateReply(@PathVariable("mbti") String mbti, @PathVariable("id") Long id, @PathVariable("replyId") Long replyId, @RequestBody CommentUpdateRequestDto requestDto) {
+    @PutMapping("/{id}/reply/{replyId}")
+    public Long updateReply( @PathVariable("id") Long id, @PathVariable("replyId") Long replyId, @RequestBody CommentUpdateRequestDto requestDto) {
         return commentService.update(replyId, requestDto);
     }
 
-    @DeleteMapping("/{mbti}/{id}/reply/{replyId}")
-    public Long deleteReply(@PathVariable("mbti") String mbti, @PathVariable("id") Long id, @PathVariable("replyId") Long replyId) {
+    @DeleteMapping("/{id}/reply/{replyId}")
+    public Long deleteReply(@PathVariable("id") Long id, @PathVariable("replyId") Long replyId) {
         return commentService.delete(replyId);
     }
 }
